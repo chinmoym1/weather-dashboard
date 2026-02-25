@@ -1,0 +1,348 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: #f2f2f2;
+    font-family: "Open Sans", sans-serif;
+  }
+  header {
+    color: white;
+    font-family: arial;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+  }
+  .main {
+    /* flex: 1; */
+    margin-left: 240px;
+    padding: 30px;
+  }
+  .main h2 {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.5px;
+  }
+  
+  .navbar {
+    background: #5d41e0;
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .navbar-list {
+    list-style-type: none;
+    margin-top: 30px;
+    padding: 0;
+  }
+  .navbar-list li {
+    margin-bottom: 10px;
+  }
+  .navbar-list li a {
+    display: block;
+    padding: 10px 14px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background 0.2s ease, padding-left 0.2s ease;
+  }
+  .navbar-list li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    padding-left: 18px;
+  }
+  .navbar-list li a.active {
+    background: white;
+    color: #5d41e0;
+    font-weight: 600;
+  }
+  
+  .nav-container {
+    margin-top: auto;
+    background: #fff;
+    border-radius: 18px;
+    height: 40%;
+    padding: 24px 20px;
+    font-family: "Segoe UI", sans-serif;
+  }
+  .nav-top {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  
+  .today {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .date,
+  .time {
+    font-size: 13px;
+    color: #888;
+  }
+  
+  .main-info {
+    text-align: center;
+  }
+  
+  .temp {
+    font-size: 48px;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  
+  .city {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .country {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .weather-details {
+    border-top: 1px solid #ddd;
+    padding-top: 0;
+  }
+  
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+  
+  .search {
+    width: 100%;
+    max-width: 400px;
+    /* position: relative; */
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .searchTerm {
+    flex: 1;
+    /* width: 15%; */
+    border: 2px solid #2b59c6;
+    border-right: none;
+    padding: 8px;
+    height: 20px;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    color: #9dbfaf;
+  }
+  
+  .searchTerm:focus {
+    color: #2b59c6;
+  }
+  
+  .searchButton {
+    /* width: 40px;
+    height: 36px; */
+    border: 2px solid #2b59c6;
+    background: #2b59c6;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 14px;
+  }
+  
+  /* cards section */
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    width: 215px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 15px;
+  }
+  .card img {
+    width: 100%;
+    height: 80%;
+  }
+  .card-content {
+    padding: 3px;
+  }
+  .card-content h3 {
+    font-size: 20px;
+    margin-left: 50px;
+    color: #102f8ed1;
+  }
+  .forecast-section {
+    padding: 30px;
+  }
+  .forecast-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .forecast-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    scrollbar-width: none;
+  }
+  .forecast-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .forecast-card {
+    min-width: 100px;
+    flex-shrink: 0;
+    background: #3732b830;
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    font-family: "Segoe UI", sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .forecast-card img {
+    width: 35px;
+    margin: 8px 0;
+  }
+  
+  .forecast-card p {
+    font-size: 14px;
+    margin: 4px 0;
+  }
+  .slider-btn {
+    background: #5760e5a3;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .slider-btn.left {
+    margin-right: 10px;
+  }
+  
+  .slider-btn.right {
+    margin-left: 10px;
+  }
+  
+  .error-section {
+    display: none;
+    margin-top: 20px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: #ffeaea;
+    color: #c62828;
+    font-size: 14px;
+  }
+  
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+  }
+  .overlay {
+    display: none;
+  }
+  
+  .close-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: white;
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  
+  /* Responsive part */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: #5d41e0;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      z-index: 1200;
+      cursor: pointer;
+    }
+  
+    .main {
+      margin-left: 0;
+      padding-top: 70px;
+    }
+  
+    .main h2 {
+      font-size: 20px;
+    }
+  
+    .navbar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1100;
+    }
+    .nav-container {
+      margin-top: 50px;       
+      padding: 20px;          
+      height: auto;           
+    }
+  
+    .navbar.active {
+      transform: translateX(0);
+    }
+  
+    .close-btn {
+      display: block;
+      margin-bottom: 20px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: white;
+      cursor: pointer;
+    }
+  
+    .overlay.active {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+  
+    .search {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  
