@@ -1,0 +1,9 @@
+ul{
+    font-size: 10px;
+    color: aquamarine;
+
+}
+nav ul li{
+    text-decoration: none;
+    display: flex;
+}
