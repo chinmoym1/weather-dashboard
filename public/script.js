@@ -213,3 +213,64 @@ searchInput.addEventListener("keydown", function (event) {
     }
   }
 });
+
+const ctx = document.getElementById("weatherChart");
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: 'Weather Graph',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+// async function buildWeatherChart() {
+//     try {
+//         const response = await fetch(`/weather?city=${encodeURIComponent(city)}`);
+//         const data = await response.json();
+
+//         const hourlyArray = data.forecast.forecastday[0].hour;
+//       // const forecastDays = data.forecast.forecastday;
+
+
+//         const labels = hourlyArray.map(item => item.time.split(' ')[1]);
+//         const temps = hourlyArray.map(item => item.temp_c);
+
+//         // 3. Initialize the Chart
+//         const ctx = document.getElementById('weatherChart').getContext('2d');
+//         new Chart(ctx, {
+//             type: 'line',
+//             data: {
+//                 labels: labels,
+//                 datasets: [{
+//                     label: `Temperature in ${location} (°C)`,
+//                     data: temps,
+//                     borderColor: 'rgb(75, 192, 192)',
+//                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
+//                     fill: true,
+//                     tension: 0.4
+//                 }]
+//             },
+//             options: {
+//                 scales: {
+//                     y: { beginAtZero: false }
+//                 }
+//             }
+//         });
+//     } catch (error) {
+//         console.error("Error fetching weather data:", error);
+//     }
+// }
+
+// buildWeatherChart();
