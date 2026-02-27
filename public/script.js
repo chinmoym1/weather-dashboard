@@ -219,10 +219,10 @@ const ctx = document.getElementById("weatherChart");
 new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     datasets: [{
-      label: 'Weather Graph',
-      data: [12, 19, 3, 5, 2, 3],
+      label: 'Avg. Temp',
+      data: [22, 29, 25, 35, 32, 27, 24],
       borderWidth: 1
     }]
   },
@@ -272,5 +272,3 @@ new Chart(ctx, {
 //         console.error("Error fetching weather data:", error);
 //     }
 // }
-
-// buildWeatherChart();
