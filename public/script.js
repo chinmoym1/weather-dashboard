@@ -24,6 +24,8 @@ const overlay = document.getElementById("overlay");
 const searchInput = document.getElementById("searchInput");
 const searchBtn = document.getElementById("searchBtn");
 
+const cardTemps = document.querySelectorAll(".cardTemp");
+
 // Fetch weather data
 async function getWeather(city) {
   errorSection.style.display = "none";
@@ -78,6 +80,32 @@ function updateWeather(data) {
 
   dateEl.textContent = localTime.toDateString();
 }
+
+async function loadStaticCardTemps() {
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(async (card) => {
+    const city = card.querySelector("h3").textContent.trim();
+
+    try {
+      const response = await fetch(`/weather?city=${encodeURIComponent(city)}`);
+      const data = await response.json();
+
+      const temp = data.current?.temp_c ?? null;
+
+      if (temp === null) throw new Error("Temp not found");
+
+      card.querySelector(".cardTemp").textContent = Math.round(temp) + "°C";
+    } catch (error) {
+      console.error("Error loading", city, error);
+      card.querySelector(".cardTemp").textContent = "N/A";
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadStaticCardTemps();
+});
 
 // Render 7-day forecast
 function showForecast(data) {
