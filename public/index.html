@@ -124,11 +124,20 @@
       <div id="errorSection" class="error-section">
         <p id="errorMessage"></p>
       </div>
-      <h2 style="margin-left: 30px;">Weather Chart</h2>
-      <div style="width: 80%; margin: auto">
-        <canvas id="weatherChart"></canvas>
+      <div class="weather-card">
+        <h2 class="chart-title">Weather Chart</h2>
+      
+        <div class="chart-tabs">
+          <span class="tab active" data-type="day">Day</span>
+          <span class="tab" data-type="week">Week</span>
+          <span class="tab" data-type="10days">10 Days</span>
+          <span class="tab" data-type="14days">14 Days</span>
+        </div>
+      
+        <div class="chart-wrapper">
+          <canvas id="weatherChart"></canvas>
+        </div>
       </div>
-    </div>
     <script src="script.js"></script>
   </body>
 </html>

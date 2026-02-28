@@ -288,10 +288,68 @@ header {
   align-self: flex-end;
   cursor: pointer;
 }
-/* .weather-chart{
-  height: 350px;
-  width: 750px;
-} */
+
+/* chart section */
+.chart-tabs {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.tab {
+  font-size: 15px;
+  color: #777;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 6px;
+  transition: 0.3s ease;
+}
+
+.tab:hover {
+  color: #111;
+}
+
+.tab.active {
+  color: #111;
+  font-weight: 600;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ff4d6d;
+  border-radius: 5px;
+}
+
+.weather-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+.chart-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.chart-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.chart-wrapper {
+  position: relative;
+  height: 400px;
+}
 
 /* Responsive part */
 @media (max-width: 768px) {

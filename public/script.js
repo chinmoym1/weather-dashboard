@@ -47,6 +47,9 @@ async function getWeather(city) {
 
     updateWeather(data);
     showForecast(data);
+
+    currentCity = city;
+    buildWeatherChart(city, "day");
   } catch (error) {
     showError(error.message);
   }
@@ -214,61 +217,162 @@ searchInput.addEventListener("keydown", function (event) {
   }
 });
 
-const ctx = document.getElementById("weatherChart");
+//chart section
+let chartRef;
 
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    datasets: [{
-      label: 'Avg. Temp',
-      data: [22, 29, 25, 35, 32, 27, 24],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
+async function buildWeatherChart(city, type = "day") {
+  try {
+    const response = await fetch(`/weather?city=${encodeURIComponent(city)}`);
+    const data = await response.json();
+
+    let labels = [];
+    let temps = [];
+
+    if (type === "day") {
+      const hours = data.forecast.forecastday[0].hour;
+      labels = hours.map((h) => h.time.split(" ")[1]);
+      temps = hours.map((h) => h.temp_c);
     }
+
+    if (type === "week") {
+      const days = data.forecast.forecastday.slice(0, 7);
+      labels = days.map((d) => d.date);
+      temps = days.map((d) => d.day.avgtemp_c);
+    }
+
+    if (type === "10days") {
+      const days = data.forecast.forecastday.slice(0, 10);
+      labels = days.map((d) => d.date);
+      temps = days.map((d) => d.day.avgtemp_c);
+    }
+
+    if (type === "14days") {
+      const days = data.forecast.forecastday.slice(0, 14);
+      labels = days.map((d) => d.date);
+      temps = days.map((d) => d.day.avgtemp_c);
+    }
+
+    const ctx = document.getElementById("weatherChart").getContext("2d");
+
+    if (chartRef) chartRef.destroy();
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(255, 99, 132, 0.35)");
+    gradient.addColorStop(1, "rgba(255, 99, 132, 0)");
+
+    chartRef = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            data: temps,
+            borderColor: "#ff4d6d",
+            backgroundColor: gradient,
+            borderWidth: 3,
+            pointRadius: 0,
+            pointHoverRadius: 7,
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "#ff4d6d",
+            pointHoverBorderWidth: 3,
+            fill: true,
+            tension: 0.45,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        animation: {
+          duration: 1000,
+          easing: "easeOutQuart",
+        },
+
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+
+        plugins: {
+          legend: {
+            display: false,
+          },
+
+          tooltip: {
+            backgroundColor: "#ffffff",
+            titleColor: "#111",
+            bodyColor: "#333",
+            borderColor: "rgba(0,0,0,0.08)",
+            borderWidth: 1,
+            padding: 12,
+            cornerRadius: 12,
+            displayColors: false,
+            caretSize: 6,
+            callbacks: {
+              label: function (context) {
+                return `Temperature: ${context.parsed.y}°C`;
+              },
+            },
+          },
+        },
+
+        scales: {
+          x: {
+            grid: {
+              display: false,
+              drawBorder: false,
+            },
+            ticks: {
+              color: "#777",
+              maxTicksLimit: 8,
+              font: {
+                size: 12,
+              },
+            },
+          },
+
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: "rgba(0,0,0,0.04)", 
+              drawBorder: false,
+            },
+            ticks: {
+              color: "#777",
+              padding: 10,
+              callback: function (value) {
+                return value + "°";
+              },
+              font: {
+                size: 12,
+              },
+            },
+          },
+        },
+
+        elements: {
+          line: {
+            capBezierPoints: true,
+          },
+        },
+      },
+    });
+  } catch (err) {
+    console.error("Chart error:", err);
   }
+}
+
+let currentCity = "Mumbai";
+
+document.querySelectorAll(".tab").forEach((tab) => {
+  tab.addEventListener("click", function () {
+    document
+      .querySelectorAll(".tab")
+      .forEach((t) => t.classList.remove("active"));
+    this.classList.add("active");
+
+    const type = this.dataset.type;
+    buildWeatherChart(currentCity, type);
+  });
 });
-
-// async function buildWeatherChart() {
-//     try {
-//         const response = await fetch(`/weather?city=${encodeURIComponent(city)}`);
-//         const data = await response.json();
-
-//         const hourlyArray = data.forecast.forecastday[0].hour;
-//       // const forecastDays = data.forecast.forecastday;
-
-
-//         const labels = hourlyArray.map(item => item.time.split(' ')[1]);
-//         const temps = hourlyArray.map(item => item.temp_c);
-
-//         // 3. Initialize the Chart
-//         const ctx = document.getElementById('weatherChart').getContext('2d');
-//         new Chart(ctx, {
-//             type: 'line',
-//             data: {
-//                 labels: labels,
-//                 datasets: [{
-//                     label: `Temperature in ${location} (°C)`,
-//                     data: temps,
-//                     borderColor: 'rgb(75, 192, 192)',
-//                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-//                     fill: true,
-//                     tension: 0.4
-//                 }]
-//             },
-//             options: {
-//                 scales: {
-//                     y: { beginAtZero: false }
-//                 }
-//             }
-//         });
-//     } catch (error) {
-//         console.error("Error fetching weather data:", error);
-//     }
-// }
