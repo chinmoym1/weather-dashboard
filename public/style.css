@@ -175,7 +175,7 @@ header {
   width: 210px;
   /* overflow: hidden; */
   /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
-  margin: 15px;
+  margin: 7px;
   position: relative;
 }
 .card img {
@@ -185,6 +185,7 @@ header {
 }
 .card-content {
   padding: 3px;
+  margin-top: -15px;
 }
 .card-content h3 {
   font-size: 20px;
