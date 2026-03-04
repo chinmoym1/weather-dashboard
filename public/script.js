@@ -95,10 +95,17 @@ async function loadStaticCardTemps() {
       const data = await response.json();
 
       const temp = data.current?.temp_c ?? null;
+      const iconUrl = data.current?.condition?.icon ?? null;
+      const conditionText = data.current?.condition?.text ?? "";
 
       if (temp === null) throw new Error("Temp not found");
 
       card.querySelector(".cardTemp").textContent = Math.round(temp) + "°C";
+
+      const iconElement = card.querySelector(".weatherIcon");
+      iconElement.src = "https:" + iconUrl;
+      iconElement.alt = conditionText;
+
     } catch (error) {
       console.error("Error loading", city, error);
       card.querySelector(".cardTemp").textContent = "N/A";
@@ -158,6 +165,7 @@ const cityCards = document.querySelectorAll(".card");
 cityCards.forEach((card) => {
   card.addEventListener("click", function () {
     const selectedCity = this.querySelector("h3").textContent.trim();
+
     getWeather(selectedCity);
   });
 });
